@@ -1,7 +1,7 @@
 from source.Entity import *
 
 def normalizeDictArray(listID, listAttr):
-    dict = creatDictArrayOfAttr("/Users/triquach/Documents/CurrentClean_Cohort_New/data/mimic.txt")
+    dict = creatDictArrayOfAttr("../data/mimic_half.txt")
     dict_normalized = copy.deepcopy(dict)
     for key in listID:
         dictArray = dict_normalized[key]
