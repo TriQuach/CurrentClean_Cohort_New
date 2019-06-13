@@ -44,9 +44,9 @@ def get2DarrayOfValue(listID, listAttr):
         scoreForOneEntity = getScoreBasedOnWindow(arrayDistance, n_windows)
         res[id] = scoreForOneEntity
     return res
-#
-# listID = ['1','77']
-# listAttr = ['HR', 'SBP']
-#
-# res = get2DarrayOfValue(listID,listAttr)
-# print(res)
+# #
+listID = ['1','77']
+listAttr = ['HR', 'SBP']
+
+res = get2DarrayOfValue(listID,listAttr)
+print(res)
