@@ -1,8 +1,8 @@
 import numpy as np
 from scipy.spatial import distance
-
-from source.Entity import *
-
+import source.constant as constant
+from source.Normalize import *
+from sklearn.metrics.pairwise import cosine_similarity
 def getChangeVector(arr):
     res = []
     for i in range(len(arr) - 1):
@@ -10,7 +10,7 @@ def getChangeVector(arr):
     return res
 
 def getDistanceVector(listID, listAttr):
-    dictEntitiesVal = creatDictArrayOfAttr("../data/mimic_half.txt")
+    dictEntitiesVal = normalizeDictArray(listID, listAttr)
     dictRes = {}
     for id in listID:
         dict = dictEntitiesVal[id]
@@ -22,7 +22,7 @@ def getDistanceVector(listID, listAttr):
         dictRes[id] = dict_temp
     return dictRes
 
-def getDistanceBetweenVectors(listID, listAttr):
+def getVolatility(listID, listAttr, type):
     res = getDistanceVector(listID, listAttr)
     arr = []
     sum = 0
@@ -34,14 +34,32 @@ def getDistanceBetweenVectors(listID, listAttr):
             arr.append(dict[attr])
 
         for i in range(len(arr) - 1):
-            dist = distance.euclidean(arr[i], arr[i+1])
+            if (type == constant.EUCLIDEAN):
+                dist = distance.euclidean(arr[i], arr[i+1])
+            else:
+                arr[i] = [arr[i]]
+                arr[i+1] = [arr[i+1]]
+                dist = cosine_similarity(arr[i], arr[i+1])
             resDict[id] = dist
         arr = []
     return resDict
 
 
+
 listID = ['1','77']
 listAttr = ['HR', 'SBP']
-res = getDistanceBetweenVectors(listID,listAttr)
 
-print("asd")
+
+print("Euclidean distance:")
+euclidean = getVolatility(listID,listAttr, constant.EUCLIDEAN)
+print(euclidean)
+
+print("*-----------------*")
+
+print("Cosine Similarity:")
+cosine = getVolatility(listID,listAttr, constant.COSINE)
+print(cosine)
+
+
+
+
