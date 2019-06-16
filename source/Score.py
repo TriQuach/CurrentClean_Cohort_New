@@ -33,7 +33,7 @@ def getScoreBasedOnWindow( arr, n_windows):
 
 
 def get2DarrayOfValue(listID, listAttr):
-    dict_normalized = normalizeDictArray(listID, listAttr)
+    dict_normalized = normalizeDictArray( listAttr)
     res = {}
     for id in listID:
         arr = []
@@ -44,9 +44,17 @@ def get2DarrayOfValue(listID, listAttr):
         scoreForOneEntity = getScoreBasedOnWindow(arrayDistance, n_windows)
         res[id] = scoreForOneEntity
     return res
+
+def getOverallScore(dict):
+    resDict = {}
+    for key in dict:
+        arr = dict[key]
+        resDict[key] = np.mean(arr)
+    return resDict
 # #
 listID = ['1','77']
 listAttr = ['HR', 'SBP']
 
-res = get2DarrayOfValue(listID,listAttr)
+res = getOverallScore(get2DarrayOfValue(listID,listAttr))
+
 print(res)

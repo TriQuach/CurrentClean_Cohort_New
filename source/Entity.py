@@ -110,6 +110,12 @@ def creatDictArrayOfAttr(fileName):
 
     return dictEntitiesVal
 
+def getAllEntitiesID(dict):
+    res = []
+    for key in dict:
+        res.append(key)
+    return res
+
 
 
 

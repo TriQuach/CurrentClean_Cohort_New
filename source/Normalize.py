@@ -1,7 +1,8 @@
 from source.Entity import *
 
-def normalizeDictArray(listID, listAttr):
+def normalizeDictArray(listAttr):
     dict = creatDictArrayOfAttr("../data/mimic_half.txt")
+    listID = getAllEntitiesID(dict)
     dict_normalized = copy.deepcopy(dict)
     for key in listID:
         dictArray = dict_normalized[key]
