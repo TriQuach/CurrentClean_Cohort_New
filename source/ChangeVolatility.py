@@ -5,7 +5,7 @@ from source.Normalize import *
 from sklearn.metrics.pairwise import cosine_similarity
 import operator
 
-n_windows = 10
+
 
 def getChangeVector(arr):
     res = []
@@ -38,26 +38,32 @@ def getVolatility(listAttr, type):
 
         for attr in listAttr:
             arr.append(dict[attr])
-        numElementEachWindow = int((len(arr[0]) - 1) / n_windows)
+        numElementEachWindow = int((len(arr[0]) - 1) / constant.N_WINDOWS)
         step = 0
         arrEDScore = []
         for i in range(len(arr) - 1):
             if (type == constant.EUCLIDEAN):
-                for k in range(n_windows):
+                for k in range(constant.N_WINDOWS):
                     sliceArr1 = arr[i][step:(step + numElementEachWindow + 1)]
                     sliceArr2 = arr[i+1][step:(step + numElementEachWindow + 1)]
                     step += numElementEachWindow
                     dist = distance.euclidean(sliceArr1, sliceArr2)
                     arrEDScore.append(dist)
-                sliceArr1 = arr[i][step: len(arr[0])]
-                sliceArr2 = arr[i+1][step: len(arr[0])]
-                dist = distance.euclidean(sliceArr1, sliceArr2)
-                arrEDScore.append(dist)
 
-            # else:
-            #     arr[i] = [arr[i]]
-            #     arr[i+1] = [arr[i+1]]
-            #     dist = cosine_similarity(arr[i], arr[i+1])
+
+            else:
+                # arr[i] = [arr[i]]
+                # arr[i+1] = [arr[i+1]]
+                # dist = cosine_similarity(arr[i], arr[i+1])
+                for k in range(constant.N_WINDOWS):
+                    sliceArr1 = arr[i][step:(step + numElementEachWindow + 1)]
+                    sliceArr2 = arr[i+1][step:(step + numElementEachWindow + 1)]
+                    sliceArr1 = [sliceArr1]
+                    sliceArr2 = [sliceArr2]
+                    step += numElementEachWindow
+                    dist = cosine_similarity(sliceArr1, sliceArr2)
+                    arrEDScore.append(dist)
+
             resDict[id] = arrEDScore
         arr = []
     return resDict
@@ -71,9 +77,9 @@ listID = ['1','77']
 listAttr = ['HR', 'SBP']
 
 
-print("Euclidean distance:")
-euclidean = getVolatility(listAttr, constant.EUCLIDEAN)
-print(euclidean)
+# print("Euclidean distance:")
+# euclidean = getVolatility(listAttr, constant.EUCLIDEAN)
+# print(euclidean)
 
 # '11': [0.3067958701721019, 0.3182699411082869, 0.31629004613110945, 0.01699251624552131],
 # '14': [0.3064969711381844, 0.28892113176415246, 0.30322267818374943, 0.025387668846560185],
@@ -84,11 +90,11 @@ print(euclidean)
 # print("Sorting...")
 # print(sortDict(euclidean))
 # print("*-----------------*")
-#
-# print("Cosine Similarity:")
-# cosine = getVolatility(listAttr, constant.COSINE)
-# print(cosine)
+# #
+print("Cosine Similarity:")
+cosine = getVolatility(listAttr, constant.COSINE)
 
+print(cosine)
 
 
 

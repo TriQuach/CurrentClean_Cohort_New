@@ -1,29 +1,30 @@
 import matplotlib.pyplot as plt
-from source.Score import *
+
 from source.Normalize import *
-
-n_windows = 10
-
-def lineChartHistoricalVal():
-    listID = ['11','14']
-    listAttr = ['HR', 'SBP']
-    res = get2DarrayOfValue(listID, listAttr)
-    legend = []
-    for key in res:
-        arr = res[key]
-        y = [i * 100 for i in arr]
-        x = range(len(arr))
-        plt.plot(x,y, marker = 'o', markerfacecolor='blue')
-        legend.append('patient_' + key)
-    plt.legend(legend)
-    plt.show()
+import source.constant as constant
+from source.ChangeVolatility import *
+from source.Entity import *
+#
+# def lineChartHistoricalVal():
+#     listID = ['11','14']
+#     listAttr = ['HR', 'SBP']
+#     res = get2DarrayOfValue(listID, listAttr)
+#     legend = []
+#     for key in res:
+#         arr = res[key]
+#         y = [i * 100 for i in arr]
+#         x = range(len(arr))
+#         plt.plot(x,y, marker = 'o', markerfacecolor='blue')
+#         legend.append('patient_' + key)
+#     plt.legend(legend)
+#     plt.show()
 
 def lineChartOnWindows():
-    listID = ['43']
+    listID = ['19']
     listAttr = ['HR', 'SBP']
     dictEntitiesVal = normalizeDictArray(listAttr)
     legend = []
-    x = range(len(dictEntitiesVal['43'][listAttr[0]]))
+    x = range(len(dictEntitiesVal['19'][listAttr[0]]))
     for key in listID:
         dict = dictEntitiesVal[key]
         for attr in listAttr:
@@ -31,10 +32,9 @@ def lineChartOnWindows():
             y = dict[attr]
             plt.plot(x, y)
             legend.append('patient_' + key + "_" + attr)
-    numElementEachWindow = int((len(x) - 1) / n_windows)
+    numElementEachWindow = int((len(x) - 1) / constant.N_WINDOWS)
     step = 0
-    arr = []
-    for i in range(n_windows):
+    for i in range(constant.N_WINDOWS):
 
         step += numElementEachWindow
         plt.axvline(x=step, linestyle="--", color='red')
@@ -43,4 +43,38 @@ def lineChartOnWindows():
     plt.show()
     print("ad")
 
-lineChartOnWindows()
+def lineChartChangeVolatilityED():
+    listID = ['40','49','76','99']
+    euclidean = getVolatility(listAttr, constant.EUCLIDEAN)
+
+    x = range(len(euclidean[listID[0]]))
+    legend = []
+    for key in listID:
+        y = [i* 100 for i in euclidean[key]]
+        plt.plot(x,y, marker = 'o', markerfacecolor='blue')
+        legend.append('patient_' + key)
+    plt.legend(legend)
+    plt.xlabel("window")
+    plt.ylabel("ED between ChangeVolatility of HR and SBP")
+
+    plt.show()
+
+def lineChartChangeVolatilityCosine():
+    listID = ['5','20','34','58']
+    cosine = getVolatility(listAttr, constant.COSINE)
+    x = range(len(cosine[listID[0]]))
+    legend = []
+    for id in listID:
+        arrNested = cosine[id]
+        arr = []
+        for i in range(len(arrNested)):
+           arr.append(arrNested[i][0][0])
+        y = [i * 100 for i in arr]
+        plt.plot(x, y, marker = 'o', markerfacecolor='blue')
+        legend.append('patient_' + id)
+    plt.legend(legend)
+    plt.xlabel("window")
+    plt.ylabel("Cosine between ChangeVolatility of HR and SBP")
+
+    plt.show()
+lineChartChangeVolatilityCosine()
