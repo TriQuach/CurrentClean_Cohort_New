@@ -1,3 +1,3 @@
 EUCLIDEAN = "euclidean"
 COSINE = "cosine"
-N_WINDOWS = 10
+N_WINDOWS = 8
