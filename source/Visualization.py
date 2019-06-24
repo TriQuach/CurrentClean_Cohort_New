@@ -13,22 +13,23 @@ from source.Entity import *
 #     for key in res:
 #         arr = res[key]
 #         y = [i * 100 for i in arr]
-#         x = range(len(arr))
+#         x = range(len(arr))'
 #         plt.plot(x,y, marker = 'o', markerfacecolor='blue')
 #         legend.append('patient_' + key)
 #     plt.legend(legend)
 #     plt.show()
 
 def lineChartOnWindows():
-    listID = ['19']
-    listAttr = ['HR', 'SBP']
+    # listID = ['72', '88', '98', '100', '66','22','43','93']
+    listID = ['1', '4', '48','86','44','51']
+    listAttr = ['HR']
     dictEntitiesVal = normalizeDictArray(listAttr)
     legend = []
-    x = range(len(dictEntitiesVal['19'][listAttr[0]]))
+    x = range(len(dictEntitiesVal[listID[0]][listAttr[0]]))
     for key in listID:
         dict = dictEntitiesVal[key]
         for attr in listAttr:
-
+            x = range(len(dict[listAttr[0]]))
             y = dict[attr]
             plt.plot(x, y)
             legend.append('patient_' + key + "_" + attr)
@@ -77,4 +78,8 @@ def lineChartChangeVolatilityCosine():
     plt.ylabel("Cosine between ChangeVolatility of HR and SBP")
 
     plt.show()
-lineChartChangeVolatilityCosine()
+
+
+
+
+lineChartOnWindows()

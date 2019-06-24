@@ -45,11 +45,11 @@ def getKLallEntities(dictEntitiesVal, listID, attr):
 
 
 
-
-
-listAttr = ['HR']
-dictEntitiesVal = normalizeDictArray(listAttr)
-listID = getAllEntitiesID(dictEntitiesVal)
-x = getKLallEntities(dictEntitiesVal, listID, 'HR')
-print(x)
+#
+#
+# listAttr = ['HR']
+# dictEntitiesVal = normalizeDictArray(listAttr)
+# listID = getAllEntitiesID(dictEntitiesVal)
+# hashMapKLEntities = getKLallEntities(dictEntitiesVal, listID, 'HR')
+# print(hashMapKLEntities)
 

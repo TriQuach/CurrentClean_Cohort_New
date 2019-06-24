@@ -73,13 +73,13 @@ def sortDict(dict):
     return sorted_x
 
 
-listID = ['1','77']
-listAttr = ['HR', 'SBP']
-
-
-print("Euclidean distance:")
-euclidean = getVolatility(listAttr, constant.EUCLIDEAN)
-print(euclidean)
+# listID = ['1','77']
+# listAttr = ['HR', 'SBP']
+#
+#
+# print("Euclidean distance:")
+# euclidean = getVolatility(listAttr, constant.EUCLIDEAN)
+# print(euclidean)
 
 # '11': [0.3067958701721019, 0.3182699411082869, 0.31629004613110945, 0.01699251624552131],
 # '14': [0.3064969711381844, 0.28892113176415246, 0.30322267818374943, 0.025387668846560185],

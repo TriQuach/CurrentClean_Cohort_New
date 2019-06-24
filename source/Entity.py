@@ -2,7 +2,6 @@
 import numpy as np
 import copy
 from operator import attrgetter
-fiveEntities = ["Marco-Etcheverry","Carlos-Valderrama","Eric-Wynalda","Preki","Robert-Warzycha"]
 
 
 class Entity(object):
