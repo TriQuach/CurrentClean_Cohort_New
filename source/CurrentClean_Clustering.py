@@ -50,6 +50,25 @@ def CurreanClean_Clustering(threshold):
 
     return cluster1,cluster2
 
+def clusterOneWindow(array, threshold1, threshold2, threshold3, threshold4):
+    cluster1 = []  # cluster that has values that are less than threshold
+    cluster2 = []
+    cluster3 = []
+    cluster4 = []
+    for i in range(len(array)):
+        if (array[i] < threshold1):
+            cluster1.append(str(i+2))
+        elif (array[i] > threshold2 and array[i] < threshold3):
+            cluster2.append(str(i+2))
+        elif (array[i] > threshold4):
+            cluster3.append(str(i + 2))
+        else:
+            cluster4.append(str(i+2))
+    return cluster1, cluster2, cluster3, cluster4
+
+
+
+
 def CurreanClean_Clustering_1stRound(threshold1, threshold2, threshold3, threshold4):
     listAttr = ['HR']
     dictEntitiesVal = normalizeDictArray(listAttr)
@@ -57,22 +76,46 @@ def CurreanClean_Clustering_1stRound(threshold1, threshold2, threshold3, thresho
     # listID = ['1','2','83','39']
     dictKL_AllEntities = getKLallEntities(dictEntitiesVal, listID, 'HR')
 
-    cluster1 = []  # cluster that has values that are less than threshold
-    cluster2 = []
-    cluster3 = []
 
-    cluster1.append(listID[0])
+
+
     dictRight = dictKL_AllEntities[listID[0]]
 
+    array_2D_allWindow = []
+
     for key in dictRight:
-        KLScore_1stWindow = dictRight[key][4]
-        if (KLScore_1stWindow < threshold1):
-            cluster1.append(key)
-        elif (KLScore_1stWindow > threshold2 and KLScore_1stWindow < threshold3):
-            cluster2.append(key)
-        elif (KLScore_1stWindow > threshold4):
-            cluster3.append(key)
-    return cluster1, cluster2, cluster3
+        array_2D_allWindow.append(dictRight[key])
+    array_2D_allWindow = np.asarray(array_2D_allWindow)
+
+    resDict = {}
+    for i in range(len(array_2D_allWindow[0])):
+        window = array_2D_allWindow[:,i]
+        cluster1, cluster2, cluster3, cluster4 = clusterOneWindow(window,threshold1,threshold2,threshold3,threshold4)
+        cluster1.insert(0,listID[0])
+
+        temp = {}
+        temp["cohort1"] = cluster1
+        temp["cohort2"] = cluster2
+        temp["cohort3"] = cluster3
+        temp["cohort4"] = cluster4
+
+        currentWindow = "window_" + str(i)
+        resDict[currentWindow] = temp
+
+
+    return resDict
+
+
+
+    # for key in dictRight:
+    #     KLScore_1stWindow = dictRight[key][4]
+    #     if (KLScore_1stWindow < threshold1):
+    #         cluster1.append(key)
+    #     elif (KLScore_1stWindow > threshold2 and KLScore_1stWindow < threshold3):
+    #         cluster2.append(key)
+    #     elif (KLScore_1stWindow > threshold4):
+    #         cluster3.append(key)
+    # return cluster1, cluster2, cluster3
 
 
 
@@ -89,18 +132,20 @@ print('middle threshold = [' + str(threshold2) + "," + str(threshold3) + ']')
 
 print('upper threshold = ' + str(threshold4))
 
-print("CurrentClean-Cohort algorithm on Window = 4 is running...")
+print("CurrentClean-Cohort algorithm is running...")
 
 print('---------*********---------')
-cluster1, cluster2, cluster3 = CurreanClean_Clustering_1stRound(threshold1, threshold2,threshold3, threshold4)
+resDict = CurreanClean_Clustering_1stRound(threshold1, threshold2,threshold3, threshold4)
 
-print("cohort1")
-print((cluster1))
-print("---------*********---------")
-print('cohort2')
-print(cluster2)
-print("---------*********---------")
-print('cohort3')
-print(cluster3)
+print(resDict)
+
+# print("cohort1")
+# print((cluster1))
+# print("---------*********---------")
+# print('cohort2')
+# print(cluster2)
+# print("---------*********---------")
+# print('cohort3')
+# print(cluster3)
 
 

@@ -46,6 +46,7 @@ def lineChartOnWindows():
 
 def lineChartChangeVolatilityED():
     listID = ['40','49','76','99']
+    listAttr = ['HR', 'SBP']
     euclidean = getVolatility(listAttr, constant.EUCLIDEAN)
 
     x = range(len(euclidean[listID[0]]))
