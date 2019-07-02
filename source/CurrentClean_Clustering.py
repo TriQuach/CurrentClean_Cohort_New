@@ -50,26 +50,34 @@ def CurreanClean_Clustering(threshold):
 
     return cluster1,cluster2
 
-def clusterOneWindow(array, threshold1, threshold2, threshold3, threshold4):
+def clusterOneWindow(array,threshold1, threshold2,threshold3, threshold4,threshold5,threshold6,threshold7,threshold8):
     cluster1 = []  # cluster that has values that are less than threshold
     cluster2 = []
     cluster3 = []
     cluster4 = []
+    cluster5 = []  # cluster that has values that are less than threshold
+    cluster6 = []
+
     for i in range(len(array)):
         if (array[i] < threshold1):
             cluster1.append(str(i+2))
         elif (array[i] > threshold2 and array[i] < threshold3):
             cluster2.append(str(i+2))
-        elif (array[i] > threshold4):
-            cluster3.append(str(i + 2))
-        else:
+        elif (array[i] > threshold4 and array[i] < threshold5):
+            cluster3.append(str(i+2))
+        elif (array[i] > threshold6 and array[i] < threshold7):
             cluster4.append(str(i+2))
-    return cluster1, cluster2, cluster3, cluster4
+        elif (array[i] > threshold8):
+            cluster5.append(str(i + 2))
+
+        else:
+            cluster6.append(str(i+2))
+    return cluster1, cluster2, cluster3,cluster4,cluster5,cluster6
 
 
 
 
-def CurreanClean_Clustering_1stRound(threshold1, threshold2, threshold3, threshold4):
+def CurreanClean_Clustering_1stRound(threshold1, threshold2,threshold3, threshold4,threshold5,threshold6,threshold7,threshold8):
     listAttr = ['HR']
     dictEntitiesVal = normalizeDictArray(listAttr)
     listID = getAllEntitiesID(dictEntitiesVal)
@@ -90,7 +98,7 @@ def CurreanClean_Clustering_1stRound(threshold1, threshold2, threshold3, thresho
     resDict = {}
     for i in range(len(array_2D_allWindow[0])):
         window = array_2D_allWindow[:,i]
-        cluster1, cluster2, cluster3, cluster4 = clusterOneWindow(window,threshold1,threshold2,threshold3,threshold4)
+        cluster1, cluster2, cluster3,cluster4,cluster5,cluster6 = clusterOneWindow(window,threshold1, threshold2,threshold3, threshold4,threshold5,threshold6,threshold7,threshold8)
         cluster1.insert(0,listID[0])
 
         temp = {}
@@ -98,6 +106,9 @@ def CurreanClean_Clustering_1stRound(threshold1, threshold2, threshold3, thresho
         temp["cohort2"] = cluster2
         temp["cohort3"] = cluster3
         temp["cohort4"] = cluster4
+        temp["cohort5"] = cluster5
+        temp["cohort6"] = cluster6
+        # temp["cohort4"] = cluster4
 
         currentWindow = "window_" + str(i)
         resDict[currentWindow] = temp
@@ -120,10 +131,28 @@ def CurreanClean_Clustering_1stRound(threshold1, threshold2, threshold3, thresho
 
 
 
-threshold1 = 2.0
-threshold2 = 8.0
-threshold3 = 9.0
-threshold4 = 19.0
+# threshold1 = 2.0
+# threshold2 = 4.0
+# threshold3 = 6.0
+# threshold4 = 8.0
+# threshold5 = 9.0
+# threshold6 = 11.0
+# threshold7 = 13.0
+# threshold8 = 15.0
+
+
+threshold1 = 3.0
+
+threshold2 = 5.0
+threshold3 = 12.0
+
+threshold4 = 13.0
+threshold5 = 19.0
+
+threshold6 = 19.5
+threshold7 = 20.0
+
+threshold8 = 21.0
 
 
 print('---------*********---------')
@@ -135,7 +164,7 @@ print('upper threshold = ' + str(threshold4))
 print("CurrentClean-Cohort algorithm is running...")
 
 print('---------*********---------')
-resDict = CurreanClean_Clustering_1stRound(threshold1, threshold2,threshold3, threshold4)
+resDict = CurreanClean_Clustering_1stRound(threshold1, threshold2,threshold3, threshold4,threshold5,threshold6,threshold7,threshold8)
 
 print(resDict)
 
