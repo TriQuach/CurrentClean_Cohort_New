@@ -2,11 +2,9 @@ from source.CurrentClean_Clustering import *
 from itertools import combinations
 
 class PairAppearance:
-    def __init__(self, nameWindow, isAppeared, key, nameCohort):
+    def __init__(self, nameWindow, count):
         self.nameWindow = nameWindow
-        self.isAppeared = isAppeared
-        self.key = key
-        self.nameCohort = nameCohort
+        self.count = count
 
 def makeCombination(array):
     res = []
@@ -27,14 +25,24 @@ def getArrayCombination(dict, window):
         arrayAllCombination.extend(combination)
     return arrayAllCombination
 
-def countAppearance(dict, array):
+def countAppearance(dict, array, window):
     for i in array:
         if (i in dict):
-            count = dict[i]
-            count += 1
-            dict[i] = count
+            rightDict = dict[i]
+            rightDict['count'] += 1
+            windows = rightDict['windows']
+            windows.append(window)
+            rightDict['windows'] = windows
+            dict[i] = rightDict
+
         else:
-            dict[i] = 1
+            rightDict = {}
+            rightDict['count'] = 1
+            temp = []
+            temp.append(window)
+            rightDict['windows'] = temp
+            dict[i] = rightDict
+
 
 
 def groupEntitiesApearance(dict):
@@ -42,23 +50,40 @@ def groupEntitiesApearance(dict):
     for window in dict:
         rightDict = dict[window]
         arrayAllCombination = getArrayCombination(dict,window)
-        countAppearance(hashMapAppearance,arrayAllCombination)
+        countAppearance(hashMapAppearance,arrayAllCombination, window)
     return hashMapAppearance
 
 
-threshold1 = 3.0
-threshold2 = 5.0
-threshold3 = 12.0
 
-threshold4 = 13.0
-threshold5 = 19.0
+threshold1 = 0.8 #1
 
-threshold6 = 19.5
-threshold7 = 20.0
+threshold2 = 1.0 #2
+threshold3 = 2.0 #2
 
-threshold8 = 21.0
+threshold4 = 2.5 #3
+threshold5 = 3.5 #3
+
+threshold6 = 4 #4
+threshold7 = 5.5 #3
+
+threshold8 = 6.0 #5
+
+
+print('---------*********---------')
+print('lower threshold = ' + str(threshold1))
+print('middle threshold = [' + str(threshold2) + "," + str(threshold3) + ']')
+
+print('upper threshold = ' + str(threshold4))
+
+print("CurrentClean-Cohort algorithm is running...")
+
+print('---------*********---------')
+
 resDict = CurreanClean_Clustering_1stRound(threshold1, threshold2,threshold3, threshold4,threshold5,threshold6,threshold7,threshold8)
+
+print(resDict)
+#
 hashMapAppearance = groupEntitiesApearance(resDict)
-sorted_hashMapAppearance = sorted(hashMapAppearance.items(), key=lambda kv: kv[1], reverse=True)
-print(dict(sorted_hashMapAppearance))
+sorted_hashMapAppearance = sorted(hashMapAppearance.items(), key=lambda kv: kv[1]['count'], reverse=True)
+print(sorted_hashMapAppearance)
 

@@ -1,4 +1,4 @@
 EUCLIDEAN = "euclidean"
 COSINE = "cosine"
-N_WINDOWS = 8
+N_WINDOWS = 20
 THRESHOLD_APPEARANCE = 2

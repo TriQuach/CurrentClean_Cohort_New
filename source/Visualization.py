@@ -21,7 +21,7 @@ from source.Entity import *
 
 def lineChartOnWindows():
     # listID = ['72', '88', '98', '100', '66','22','43','93']
-    listID = ['1', '4', '48','86','44','51']
+    listID = ['20','22','27','35']
     listAttr = ['HR']
     dictEntitiesVal = normalizeDictArray(listAttr)
     legend = []
