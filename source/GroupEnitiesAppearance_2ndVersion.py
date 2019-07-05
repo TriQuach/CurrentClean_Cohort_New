@@ -55,18 +55,18 @@ def groupEntitiesApearance(dict):
 
 
 
-threshold1 = 0.8 #1
+threshold1 = 3.0 #1
 
-threshold2 = 1.0 #2
-threshold3 = 2.0 #2
+threshold2 = 5.0 #2
+threshold3 = 12.0 #2
 
-threshold4 = 2.5 #3
-threshold5 = 3.5 #3
+threshold4 = 13.0 #3
+threshold5 = 19.0 #3
 
-threshold6 = 4 #4
-threshold7 = 5.5 #3
+threshold6 = 19.5 #4
+threshold7 = 20.0 #3
 
-threshold8 = 6.0 #5
+threshold8 = 21.0 #5
 
 
 print('---------*********---------')
