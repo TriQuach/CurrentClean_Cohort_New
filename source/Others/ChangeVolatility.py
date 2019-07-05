@@ -1,7 +1,6 @@
-import numpy as np
 from scipy.spatial import distance
-import source.constant as constant
-from source.Normalize import *
+import source.Others.constant as constant
+from source.Entity.Normalize import *
 from sklearn.metrics.pairwise import cosine_similarity
 import operator
 

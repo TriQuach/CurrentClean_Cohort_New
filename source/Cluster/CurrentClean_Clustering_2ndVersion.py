@@ -1,4 +1,4 @@
-from source.KL_OneAttr_MultipleEntities import *
+from source.Similarity.KL_OneAttr_MultipleEntities import *
 
 def isInTheSameCluster(key1,key2, cluster1, cluster2):
     if (key1 in cluster1 and key2 in cluster1):
@@ -115,3 +115,32 @@ def CurreanClean_Clustering_1stRound(threshold1, threshold2,threshold3, threshol
 
 
     return resDict
+
+
+threshold1 = 3.0 #1
+
+threshold2 = 5.0 #2
+threshold3 = 12.0 #2
+
+threshold4 = 13.0 #3
+threshold5 = 19.0 #3
+
+threshold6 = 19.5 #4
+threshold7 = 20.0 #3
+
+threshold8 = 21.0 #5
+
+
+print('---------*********---------')
+print('lower threshold = ' + str(threshold1))
+print('middle threshold = [' + str(threshold2) + "," + str(threshold3) + ']')
+
+print('upper threshold = ' + str(threshold4))
+
+print("CurrentClean-Cohort algorithm is running...")
+
+print('---------*********---------')
+
+resDict = CurreanClean_Clustering_1stRound(threshold1, threshold2,threshold3, threshold4,threshold5,threshold6,threshold7,threshold8)
+
+print(resDict)

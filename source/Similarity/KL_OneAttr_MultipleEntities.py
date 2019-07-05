@@ -1,5 +1,5 @@
-from source.Normalize import *
-import source.constant as constant
+from source.Entity.Normalize import *
+import source.Others.constant as constant
 def KL(P, Q):
     epsilon = 0.00001
 

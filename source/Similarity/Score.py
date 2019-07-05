@@ -1,4 +1,4 @@
-from source.Normalize import *
+from source.Entity.Normalize import *
 import numpy as np
 
 n_windows = 10

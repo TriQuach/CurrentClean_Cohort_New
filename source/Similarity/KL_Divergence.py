@@ -1,8 +1,5 @@
-from scipy import stats
-import numpy as np
-import pandas as pd
-from source.Normalize import *
-from source.Entity import *
+from source.Entity.Normalize import *
+from source.Entity.Entity import *
 
 n_windows = 10
 
