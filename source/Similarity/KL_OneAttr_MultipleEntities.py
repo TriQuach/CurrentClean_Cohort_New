@@ -36,9 +36,10 @@ def getKLallEntities(dictEntitiesVal, listID, attr):
     dictRes = {}
     for i in range(len(listID)):
         dictKL_Score = {}
-        for j in range(i+1, len(listID)):
-            arrayKLscoreOnWindows = getKLbetween2Entities(dictEntitiesVal, listID[i], listID[j], attr)
-            dictKL_Score[listID[j]] = arrayKLscoreOnWindows
+        for j in range(len(listID)):
+            if (i!=j):
+                arrayKLscoreOnWindows = getKLbetween2Entities(dictEntitiesVal, listID[i], listID[j], attr)
+                dictKL_Score[listID[j]] = arrayKLscoreOnWindows
         dictRes[listID[i]] = dictKL_Score
 
     return dictRes
