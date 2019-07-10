@@ -84,7 +84,7 @@ dictKL_AllEntities, resDict = CurreanClean_Clustering()
 
 print('---------*********---------')
 
-print('threshold clustering = ' + str(constant.THRESHOLD_CLUSTER))
+print('threshold clustering = ' + str(constant.THRESHOLD_ENTITIES))
 
 print("CurrentClean-Cohort algorithm is running...")
 

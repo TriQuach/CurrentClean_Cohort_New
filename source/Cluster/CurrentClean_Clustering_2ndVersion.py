@@ -100,7 +100,7 @@ def CurreanClean_Clustering():
             for i in range(len(arrayKLWindows)):
                 cluster1 = []
                 cluster2 = []
-                if (arrayKLWindows[i] < constant.THRESHOLD_CLUSTER):
+                if (arrayKLWindows[i] < constant.THRESHOLD_ENTITIES):
                     currentWindow = 'window_' + str(i)
                     if (currentWindow in resDict):
                         if (mainID in resDict[currentWindow]):

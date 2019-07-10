@@ -37,3 +37,20 @@ threshold7 = 5.5 #4
 threshold8 = 6.0 #5
 
 ---------**** Week 6 *******--------------
+
+---------**** Week 7 *******--------------
+
+N_WINDOWS = 8
+
+N_ENTITES = 20
+THRESHOLD_CLUSTER = 1.0
+['5','11','14','17','8'] -> 5,11 || 14,17 || 8
+
+
+N_ENTITES = 100
+THRESHOLD_CLUSTER = 1.0
+['38','65','3','15'] -> distance btw entities inside of clusters is good, clusters are close together
+['9','19','20','77','60','98'] -> clusters are far away
+
+
+---------**** Week 7 *******--------------
