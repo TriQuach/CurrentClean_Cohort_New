@@ -1,0 +1,92 @@
+---------**** Week 6 *******--------------
+
+Num windows = 8
+Num entities = 40
+
+
+threshold1 = 3.0 #1
+
+threshold2 = 5.0 #2
+threshold3 = 12.0 #2
+
+threshold4 = 13.0 #3
+threshold5 = 19.0 #3
+
+threshold6 = 19.5 #4
+threshold7 = 20.0 #4
+
+threshold8 = 21.0 #5
+
+---------**---------
+
+
+Num windows = 20
+Num entities = 20
+
+threshold1 = 0.8 #1
+
+threshold2 = 1.0 #2
+threshold3 = 2.0 #2
+
+threshold4 = 2.5 #3
+threshold5 = 3.5 #3
+
+threshold6 = 4 #4
+threshold7 = 5.5 #4
+
+threshold8 = 6.0 #5
+
+---------**** Week 6 *******--------------
+
+---------**** Week 7 *******--------------
+
+--RemoveOverlap_1stVersion--
+
+    N_WINDOWS = 8
+
+    N_ENTITES = 20
+    THRESHOLD_CLUSTER = 1.0
+    ['5','11','14','17','8'] -> 5,11 || 14,17 || 8
+
+
+    N_ENTITES = 100
+    THRESHOLD_CLUSTER = 1.0
+    ['38','65','3','15'] -> distance btw entities inside of clusters is good, clusters are close together
+    ['9','19','20','77','60','98'] -> clusters are far away
+
+--RemoveOverlap_1stVersion--
+
+
+--RemoveOverlap_2ndVersion--
+
+** Observation **
+
+    Stable from THRESHOLD_ENTITIES = 1.0 -> THRESHOLD_ENTITIES = 2.0 -> THRESHOLD_ENTITIES = 3.0
+
+    Unstable at THRESHOLD_ENTITIES = 4.0
+** Charateristic **
+    At THRESHOLD_ENTITIES = 3.0, we have ['3','10', '14', '15', '17'] as a group
+    At THRESHOLD_ENTITIES = 4.7, we have ['10', '13', '14', '17'] as a group, no more ['3','15']
+**  REASON  **
+    Inrease threshold -> increase number entities of each group (before removeOverlap)
+    -> at some mainID, the algorithm breaks them
+
+        containers:
+        <class 'list'>: ['2', '5', '10', '11', '13', '14', '16', '17']
+        <class 'list'>: ['2', '5', '11', '16']
+        <class 'list'>: ['2', '5', '11', '13', '16']
+
+    -> mainID = 2, ['2', '5', '11', '16'] has lowest KL_Score -> apply algorithms -> 3 groups: ['2', '5', '11', '16'] , ['13'] , -->['10', '13', '14', '17']<--
+
+** Expriments result **
+threshold = 1.0 -> 5-11 || 3-15-18
+threshold = 2.0 -> 3-14-15-17 || 6-8-12
+threshold = 3.0 -> 3-10-14-15-17 || 2-5-11
+threshold = 8.0 -> 5-11 || 3-4-6 || --> 1-2 <-- // when threshold = 8, we have '1'
+
+--RemoveOverlap_2ndVersion--
+
+
+
+
+---------**** Week 7 *******--------------

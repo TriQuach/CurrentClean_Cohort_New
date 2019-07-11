@@ -83,7 +83,7 @@ resDict = CurreanClean_Clustering_1stRound(threshold1, threshold2,threshold3, th
 
 print(resDict)
 #
-# hashMapAppearance = groupEntitiesApearance(resDict)
-# sorted_hashMapAppearance = sorted(hashMapAppearance.items(), key=lambda kv: kv[1]['count'], reverse=True)
-# print(sorted_hashMapAppearance)
+hashMapAppearance = groupEntitiesApearance(resDict)
+sorted_hashMapAppearance = sorted(hashMapAppearance.items(), key=lambda kv: kv[1]['count'], reverse=True)
+print(sorted_hashMapAppearance)
 
