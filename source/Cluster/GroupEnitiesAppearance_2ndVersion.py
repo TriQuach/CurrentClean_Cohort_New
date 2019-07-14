@@ -1,3 +1,4 @@
+from source.Cluster.RemoveOverlap_2ndVersion import *
 from source.Cluster.CurrentClean_Clustering import *
 from itertools import combinations
 
@@ -79,9 +80,10 @@ print("CurrentClean-Cohort algorithm is running...")
 
 print('---------*********---------')
 
-resDict = CurreanClean_Clustering_1stRound(threshold1, threshold2,threshold3, threshold4,threshold5,threshold6,threshold7,threshold8)
+resDict = removeOverlap_2ndVersion(resDict, dictKL_AllEntities)
+# resDict = CurreanClean_Clustering_1stRound(threshold1, threshold2,threshold3, threshold4,threshold5,threshold6,threshold7,threshold8)
 
-print(resDict)
+# print(resDict)
 #
 hashMapAppearance = groupEntitiesApearance(resDict)
 sorted_hashMapAppearance = sorted(hashMapAppearance.items(), key=lambda kv: kv[1]['count'], reverse=True)

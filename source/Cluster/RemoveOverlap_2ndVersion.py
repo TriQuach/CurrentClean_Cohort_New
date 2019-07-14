@@ -81,11 +81,13 @@ def removeOverlap_2ndVersion(resDict, dictKL_AllEntities):
             removeDuplicate = removeDuplicateGroup(removeDuplicate)
             # mergeChildrenGroup(removeDuplicate)
 
-            print('zxc')
+            # print('zxc')
 
-        
+        groupName = {}
+        for i in range(len(removeDuplicate)):
+            groupName['cluster_' + str(i)] = removeDuplicate[i]
 
-        removeDict[window] = removeDuplicate
+        removeDict[window] = groupName
 
     return removeDict
 

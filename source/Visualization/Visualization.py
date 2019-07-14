@@ -20,7 +20,7 @@ from source.Others.ChangeVolatility import *
 
 def lineChartOnWindows():
     # listID = ['72', '88', '98', '100', '66','22','43','93']
-    listID = ['5','11','3','4','6','1','2']
+    listID = ['28','33']
     listAttr = ['HR']
     dictEntitiesVal = normalizeDictArray(listAttr)
     legend = []

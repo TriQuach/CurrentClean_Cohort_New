@@ -78,11 +78,34 @@ threshold8 = 6.0 #5
 
     -> mainID = 2, ['2', '5', '11', '16'] has lowest KL_Score -> apply algorithms -> 3 groups: ['2', '5', '11', '16'] , ['13'] , -->['10', '13', '14', '17']<--
 
-** Expriments result **
+** Expriments result: Clustering algorithm **
 threshold = 1.0 -> 5-11 || 3-15-18
 threshold = 2.0 -> 3-14-15-17 || 6-8-12
 threshold = 3.0 -> 3-10-14-15-17 || 2-5-11
-threshold = 8.0 -> 5-11 || 3-4-6 || --> 1-2 <-- // when threshold = 8, we have '1'
+threshold = 7.0 -> 3-15-18 || 5-11 || --> 1 <-- // when threshold = 7.0, we have '1'
+
+** Expriments result: count appearance of groups **
+threshold = 1.0, N_ENTITES = 100, N_WINDOWS = 8 -> 85-94: count = 3 - Win 1,2,3
+threshold = 1.0, N_ENTITES = 100, N_WINDOWS = 8 -> 4-46-71-100: count = 1 - Win 4
+
+threshold = 1.0, N_ENTITES = 100, N_WINDOWS = 20 -> 21-33: count = 7 - Win 11,5,9,15,4,6,0 (quite slow running time)
+threshold = 4.0, N_ENTITES = 100, N_WINDOWS = 20 ->  ** cannot be finished **
+
+threshold = 4.0, N_ENTITES = 80, N_WINDOWS = 20 ->  ** cannot be finished ** -> there are 19 entities in cluster_11
+threshold = 2.0, N_ENTITES = 100, N_WINDOWS = 20 ->  ** cannot be finished **
+
+threshold = 2.0, N_ENTITES = 100, N_WINDOWS = 20 ->  ** cannot be finished **
+threshold = 2.0, N_ENTITES = 100, N_WINDOWS = 10 -> 28-33: count = 4, Win 1,6,2,3  27 secs
+
+
+
+
+** Observation **
+countAppearance algorithm is dependent on:
+- threshold: bigger threshold -> less clusters -> more entities in one cluster -> more running time of combination
+- number of windows / windowSize: bigger number of windows -> less clusters -> more entities.  Furthermore, total running time = runningTime of 1 window * N_WINDOWS
+
+
 
 --RemoveOverlap_2ndVersion--
 
