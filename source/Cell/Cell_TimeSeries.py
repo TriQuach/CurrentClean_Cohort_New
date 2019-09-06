@@ -191,8 +191,13 @@ def checkGroundTruth(attribute, value):
             return truth, truth, True
         else:
             return value, truth, False
-    else:
-        return value,value,False
+    elif (attribute == constant.ABE or attribute == constant.ACO2 or attribute == constant.TC or attribute == constant.RBCF):
+        truth = random.uniform(0.0, 1.0)
+        if (isLabel == True):
+            return truth, truth, True
+        else:
+            return value, truth, False
+    # ABE, ACO2, TC, RBCF
 def creatDictArrayOfAttr(fileName):
     dictEntitiesVal = {}
     arrayAttributes = []
@@ -273,10 +278,18 @@ def modify1stObja(dictEntitiesVal):
             firstObj.label = firstObj.truth
             dictEntitiesVal[entity][attr][0] =firstObj
 
-dictEntitiesVal = creatDictArrayOfAttr('/Users/triquach/Documents/CurrentClean_CohortNew/data/mimic_half.txt')
+def temp(dictEntitiesVal):
+    arr = []
+    temp = dictEntitiesVal['1']
+    for attr in temp:
+        arr.append(attr)
+    return arr
+
+dictEntitiesVal = creatDictArrayOfAttr('/Users/triquach/Documents/CurrentClean_CohortNew/data/Mimic100_3.txt')
 modify1stObja(dictEntitiesVal)
 writeFile(dictEntitiesVal)
-print('asd')
+arr = temp(dictEntitiesVal)
+print(arr)
 
 
 
